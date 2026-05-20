@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-ochre: var(--ochre);
+  --color-indigo-paint: var(--indigo-paint);
+  --color-terracotta: var(--terracotta);
+  --color-sunflower: var(--sunflower);
+  --color-emerald-paint: var(--emerald-paint);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+
+  --font-display: var(--font-playfair), "Playfair Display", "Cormorant Garamond", serif;
+  --font-sans: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-script: var(--font-caveat), "Caveat", cursive;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: oklch(0.96 0.04 85);
+  --foreground: oklch(0.18 0.04 70);
+  --canvas: oklch(0.93 0.06 82);
+  --ochre: oklch(0.74 0.16 75);
+  --sunflower: oklch(0.82 0.18 88);
+  --indigo-paint: oklch(0.32 0.13 260);
+  --terracotta: oklch(0.55 0.16 38);
+  --emerald-paint: oklch(0.48 0.12 155);
+  --ink: oklch(0.16 0.03 60);
+
+  --primary: oklch(0.32 0.13 260);
+  --primary-foreground: oklch(0.96 0.04 85);
+  --secondary: oklch(0.74 0.16 75);
+  --secondary-foreground: oklch(0.18 0.04 70);
+  --accent: oklch(0.55 0.16 38);
+  --accent-foreground: oklch(0.96 0.04 85);
+  --muted: oklch(0.88 0.04 80);
+  --muted-foreground: oklch(0.42 0.05 60);
+  --card: oklch(0.94 0.05 82);
+  --card-foreground: oklch(0.18 0.04 70);
+  --popover: oklch(0.94 0.05 82);
+  --popover-foreground: oklch(0.18 0.04 70);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.96 0.04 85);
+  --border: oklch(0.78 0.06 75 / 0.4);
+  --input: oklch(0.78 0.06 75 / 0.4);
+  --ring: oklch(0.55 0.16 38);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(at 20% 10%, oklch(0.82 0.18 88 / 0.25) 0px, transparent 50%),
+      radial-gradient(at 80% 90%, oklch(0.32 0.13 260 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 60% 40%, oklch(0.55 0.16 38 / 0.12) 0px, transparent 50%);
   }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .paint-stroke {
+    background-image: linear-gradient(120deg, var(--sunflower) 0%, var(--ochre) 50%, var(--terracotta) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .impasto-shadow {
+    box-shadow:
+      0 2px 0 oklch(0.32 0.13 260 / 0.15),
+      0 12px 30px -8px oklch(0.18 0.04 70 / 0.35),
+      inset 0 1px 0 oklch(1 0 0 / 0.2);
+  }
+  .frame-painted {
+    box-shadow:
+      0 0 0 6px var(--canvas),
+      0 0 0 8px oklch(0.32 0.13 260 / 0.6),
+      0 30px 60px -20px oklch(0.18 0.04 70 / 0.55);
+  }
+  .brush-divider {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--ochre) 0px,
+      var(--terracotta) 8px,
+      var(--indigo-paint) 16px,
+      var(--sunflower) 24px,
+      var(--ochre) 32px
+    );
+    height: 3px;
+  }
+  .swirl-bg {
+    background:
+      radial-gradient(ellipse at top, oklch(0.32 0.13 260 / 0.18), transparent 60%),
+      radial-gradient(ellipse at bottom right, oklch(0.55 0.16 38 / 0.12), transparent 60%);
+  }
+  .text-shadow-paint {
+    text-shadow:
+      2px 2px 0 oklch(0.32 0.13 260 / 0.4),
+      4px 4px 12px oklch(0.18 0.04 70 / 0.6);
+  }
 }

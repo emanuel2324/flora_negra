@@ -2,62 +2,70 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+    <div className="relative min-h-screen w-full flex flex-col bg-ink overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/woman.jpg" 
+          alt="Mulher Negra com Flores" 
+          fill
           priority
+          className="object-cover object-center"
+          quality={100}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        {/* Gradient Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/50 to-transparent"></div>
+        {/* Top Gradient specific for header readability */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-ink/75 via-ink/30 to-transparent"></div>
+        <div className="absolute inset-0 bg-ink/10"></div>
+      </div>
+
+      {/* Header / Navbar */}
+      <header className="fixed top-0 z-50 w-full px-6 md:px-16 py-6 flex items-center justify-between">
+        <div className="text-3xl font-display text-canvas flex items-baseline gap-2 cursor-pointer drop-shadow-md">
+          <span>Flora</span>
+          <span className="font-script text-sunflower text-4xl">Negra</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        
+        <nav className="hidden md:flex items-center gap-10 text-canvas/90 text-xs tracking-[0.2em] font-medium uppercase drop-shadow-xl text-shadow-paint font-sans md:mr-8 lg:mr-16">
+          <a href="#" className="hover:text-sunflower transition-colors">Manifesto</a>
+          <a href="#" className="hover:text-sunflower transition-colors">Campanha</a>
+          <a href="#" className="hover:text-sunflower transition-colors">Coleção</a>
+        </nav>
+      </header>
+
+      {/* Main Content */}
+      <main className="relative z-10 flex-grow flex flex-col justify-center px-6 md:px-16 pt-32 pb-20 md:py-32 max-w-[1440px] mx-auto w-full">
+        <div className="max-w-3xl">
+          <p className="font-script text-sunflower text-3xl md:text-5xl mb-4 drop-shadow-md">
+            uma campanha em óleo
+          </p>
+          
+          <h1 className="font-display text-6xl md:text-7xl lg:text-8xl leading-[1.1] text-canvas text-shadow-paint">
+            A beleza <span className="text-sunflower">não se</span><br />
+            <span className="text-transparent" style={{ WebkitTextStroke: '1.5px var(--color-sunflower)' }}>pinta,</span><br />
+            ela se <span className="italic">revela.</span>
+          </h1>
+          
+          <p className="text-canvas/90 font-sans text-xl md:text-2xl leading-relaxed mt-8 max-w-xl drop-shadow-md">
+            Cada fio, cada flor, cada olhar. Celebramos a mulher negra como uma 
+            obra viva — pintada com a coragem das pinceladas de Van Gogh.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 mt-10">
+            <a 
+              href="#" 
+              className="inline-flex items-center justify-center px-10 py-4 bg-sunflower text-ink font-display font-medium transition-transform hover:scale-105 active:scale-95 impasto-shadow"
+            >
+              Ver a Campanha
+            </a>
+            <a 
+              href="#" 
+              className="inline-flex items-center justify-center px-10 py-4 border border-canvas text-canvas font-display font-medium bg-ink/30 transition-all hover:bg-canvas hover:text-ink active:bg-canvas/90 shadow-lg backdrop-blur-sm"
+            >
+              Nosso Manifesto
+            </a>
+          </div>
         </div>
       </main>
     </div>
